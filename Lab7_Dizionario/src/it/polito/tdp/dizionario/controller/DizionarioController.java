@@ -56,7 +56,7 @@ public class DizionarioController {
     void GeneraGrafo(ActionEvent event) {
         Connessi.setDisable(false);
         Vicini.setDisable(false);
-        model.generaGrafo();
+        model.generaGrafo(Integer.parseInt(numeroLettere.getText()));
     }
 
     @FXML

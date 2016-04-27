@@ -11,9 +11,9 @@ import org.jgrapht.graph.SimpleGraph;
 public class ModelloGrafi {
 	private UndirectedGraph<String,DefaultEdge> grafo;
 	
-	public void generaGrafo(){
+	public void generaGrafo(int lunghezza){
 		ModelloGrafiDAO m= new ModelloGrafiDAO();
-		List<String> parole= m.parole();
+		List<String> parole= m.parole(lunghezza);
 		grafo= new SimpleGraph<String,DefaultEdge>(DefaultEdge.class);
 		Graphs.addAllVertices(this.grafo, parole);
 		for(String parola: parole){
@@ -37,6 +37,7 @@ public class ModelloGrafi {
 	}
 	
 	public List<String> trovaConnessi(String parola){
+		// esplorazione ricorsiva del grafo
 		return null;
 	}
 	
