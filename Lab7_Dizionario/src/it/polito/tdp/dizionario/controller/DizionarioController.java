@@ -49,7 +49,9 @@ public class DizionarioController {
 
     @FXML
     void Cancella(ActionEvent event) {
-
+    	Risultato.clear();
+    	numeroLettere.clear();
+    	parola.clear();
     }
 
     @FXML
