@@ -7,6 +7,8 @@ import org.jgrapht.Graphs;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
+import org.jgrapht.traverse.DepthFirstIterator;
+import org.jgrapht.traverse.GraphIterator;
 
 public class ModelloGrafi {
 	private UndirectedGraph<String,DefaultEdge> grafo;
@@ -18,10 +20,8 @@ public class ModelloGrafi {
 		Graphs.addAllVertices(this.grafo, parole);
 		for(String parola: parole){
 			for(int i=0;i<parole.size();i++){
-				if(parola.length()==parole.get(i).length()){
 					if(confronto(parola,parole.get(i))==1)
 						grafo.addEdge(parola, parole.get(i));
-				}
 					
 			}
 		}
@@ -38,13 +38,24 @@ public class ModelloGrafi {
 	
 	public List<String> trovaConnessi(String parola){
 		// esplorazione ricorsiva del grafo
-		return null;
+		List<String> connessi= new ArrayList<String>();
+		ModelloGrafiDAO m= new ModelloGrafiDAO();
+		if(!m.esiste(parola))
+			connessi.add("Non esiste la parola");
+		else{
+			GraphIterator<String,DefaultEdge>iteratore= new DepthFirstIterator<String,DefaultEdge>(this.grafo,parola);
+			while(iteratore.hasNext()){
+				connessi.add(iteratore.next());
+			}
+		}
+		
+		return connessi;
 	}
 	
 	private int confronto(String parola, String parola2) {
 		int confronto=0;
 		for(int i=0,j=0;i<parola.length();i++,j++){
-			if(parola.charAt(i)==parola2.charAt(j))
+			if(parola.charAt(i)!=parola2.charAt(j))
 				confronto++;
 		}
 		return confronto;

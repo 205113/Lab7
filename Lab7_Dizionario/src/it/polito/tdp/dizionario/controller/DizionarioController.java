@@ -52,25 +52,40 @@ public class DizionarioController {
     	Risultato.clear();
     	numeroLettere.clear();
     	parola.clear();
+    	Vicini.setDisable(true);
+    	Connessi.setDisable(true);
+        parola.setDisable(false);
+        numeroLettere.setDisable(false);
     }
 
     @FXML
     void GeneraGrafo(ActionEvent event) {
         Connessi.setDisable(false);
         Vicini.setDisable(false);
+        parola.setDisable(true);
+        numeroLettere.setDisable(true);
         model.generaGrafo(Integer.parseInt(numeroLettere.getText()));
     }
 
     @FXML
     void TrovaConnessi(ActionEvent event) {
-    	List<String> vicini= model.trovaVicini(parola.getText());
-    	Visualizza(vicini);
+    	if(Integer.parseInt(numeroLettere.getText())==parola.getText().length()){
+    		List<String> vicini= model.trovaConnessi(parola.getText());
+    		Visualizza(vicini);
+    		}
+    	else
+    		Risultato.setText("Numero lettere e lunghezza della parola non coincidono");
     }
 
     @FXML
     void TrovaVicini(ActionEvent event) {
-    	List<String> connessi= model.trovaConnessi(parola.getText());
-    	Visualizza(connessi);
+    	if(Integer.parseInt(numeroLettere.getText())==parola.getText().length()){
+    		List<String> connessi= model.trovaVicini(parola.getText());
+    		Visualizza(connessi);
+    		}
+
+    	else
+    		Risultato.setText("Numero lettere e lunghezza della parola non coincidono");
     }
     private void Visualizza(List<String> elementi){
     	String s="";

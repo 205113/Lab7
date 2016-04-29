@@ -21,7 +21,7 @@ public class ModelloGrafiDAO {
 			try {
 					sql="SELECT nome FROM parola WHERE nome LIKE ?";
 					PreparedStatement s= conn.prepareStatement(sql);
-					s.setString(0, parola);
+					s.setString(1, parola);
 					ResultSet rs= s.executeQuery();
 					while(rs.next()){
 						parole.add(rs.getString("nome"));
